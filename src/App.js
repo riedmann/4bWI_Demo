@@ -1,11 +1,9 @@
-import "./App.css";
-import Container from "./components/molekules/Container";
+
 
 function App() {
   return (
-    <div className="bg-green-400" style={{ border: "solid" }}>
+    <div className="bg-green-400">
       <h1>Hello</h1>
-     <Container/>
     </div>
   );
 }
