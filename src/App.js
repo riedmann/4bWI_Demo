@@ -1,9 +1,9 @@
-
+import Main from "./components/pages/Main";
 
 function App() {
   return (
-    <div className="bg-green-400">
-      <h1>Hello</h1>
+    <div>
+      <Main />
     </div>
   );
 }
