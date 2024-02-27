@@ -1,32 +1,27 @@
-import React, { useState } from "react";
-import Menu from "../templates/Menu";
-import FootballTable from "./FootballTable";
-import Footer from "../templates/Footer";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../services/DataService";
 
 export default function Main() {
-  const [actualSite, setActualSite] = useState("table");
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+    const loadData = async () => {
+      let { data: people, error } = await supabase.from("People").select("*");
+      setPeople(people);
+    };
 
-  const getActualSite = () => {
-    if (actualSite === "table") {
-      return <FootballTable />;
-    }
-    if (actualSite === "matches") {
-      return <div>Matches</div>;
-    }
-
-    return <div>not found</div>;
-  };
+    loadData();
+    console.log("hello");
+  }, []);
   return (
     <div>
-      <Menu
-        items={["table", "matches", "drei"]}
-        onClick={(site) => {
-          setActualSite(site);
-        }}
-      ></Menu>
-
-      {getActualSite()}
-      <Footer />
+      <h1>People</h1>
+      <div>
+        {people.map((person) => (
+          <div>
+            {person.firstname} {person.lastname}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
